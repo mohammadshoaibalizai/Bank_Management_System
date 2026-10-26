@@ -2,10 +2,14 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 import java.util.Scanner;
 public class Main {
+    //Scanner for using user input
     private static final Scanner sc=new Scanner(System.in);
+    // manage account res and account related operation
     private static final AccountManager manager=new AccountManager();
     public static void main(String[] args) {
+        //control the execution of the main method
         boolean running = true;
+        //Display the menu until the  user chooses to exit
         while (running) {
             System.out.println("\n===============Bank System =======================");
             System.out.println("1. Create saving account ");
@@ -16,6 +20,7 @@ public class Main {
             System.out.println("6. Show All Account ");
             System.out.println("7. Exit");
             int option = readInt("Choose an option");
+            //handle the selected menu option
             switch (option) {
                 case 1:
 
@@ -46,6 +51,7 @@ public class Main {
         }
         sc.close();
     }
+    //collect details and create a savings account
     private static void createSavingAccount(){
         String name=readText("Enter account holder name");
         String number=readText("Enter account number : ");
@@ -57,6 +63,7 @@ public class Main {
             System.out.println("Error : "+e.getMessage());
         }
     }
+    //collect details and create current account
     private static void createCurrentAccount(){
         String name=readText("Enter account holder name :");
         String number =readText("Enter account number : ");
@@ -71,6 +78,7 @@ public class Main {
             System.out.println("Error : "+e.getMessage());
         }
     }
+    //find account and deposit the specified amount
     private static void depositMoney(){
     BankAccount account= getAccountFromInput();
     if (account== null){
@@ -80,6 +88,7 @@ public class Main {
     account.deposit(amount);
 
     }
+    //find account and withdraw the specified amount
     private static void withdrawMoney(){
         BankAccount account=getAccountFromInput();
         if(account==null){
@@ -89,12 +98,14 @@ public class Main {
         account.withdraw(amount);
 
     }
+    //find and  display the details of an account
     private static void checkAccount(){
         BankAccount account=getAccountFromInput();
         if(account !=null){
             account.showDetails();
         }
     }
+    //Search for an account using its account number
     private static BankAccount getAccountFromInput(){
         String number =readText("Enter account number :");
         BankAccount account=manager.findAccount(number);
@@ -103,11 +114,13 @@ public class Main {
         }
         return account;
     }
+    //Read text input from the user
     private static String readText(String message){
         System.out.println(message);
         return sc.nextLine().trim();
 
         }
+        //Read and validate an integer input
         private static int readInt(String message) {
             while (true) {
                 System.out.println(message);
@@ -119,6 +132,7 @@ public class Main {
                 }
             }
         }
+        //Read and validate a numeric input
     private static double readDouble(String message){
         while (true){
             System.out.println(message);
